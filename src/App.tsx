@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import "./App.css";
+// import BlogCard from "./components/BlogCard";
+
+// function App() {
+//   return <BlogCard />;
+// }
+
+// export default App;
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BlogCard from "./components/BlogCard";
+import BlogForm from "./pages/BlogForm";
+import { BlogProvider } from "./context/BlogContext";
+import BlogDetails from "./pages/BlogDetails";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BlogProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<BlogCard />} />
+          <Route path="/blog/:id" element={<BlogDetails />} />
+          <Route path="/new" element={<BlogForm key="new" />} />
+          <Route path="/edit/:id" element={<BlogForm key="edit" />} />
+        </Routes>
+      </BrowserRouter>
+    </BlogProvider>
   );
 }
-
 export default App;
